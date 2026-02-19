@@ -18,6 +18,18 @@ function App() {
     setBill(e.target.value);
   }
 
+  function handleReset() {
+    const confirm = window.confirm(
+      `Are you sure you want to reset the Calculator... 🤔`,
+    );
+
+    if (confirm) {
+      setBill(0);
+      setService(0);
+      setFriendTip(0);
+    }
+  }
+
   return (
     <>
       <Bill bill={bill} onHandleBill={handleBill}></Bill>
@@ -32,6 +44,7 @@ function App() {
         serviceTip={service}
         friendTip={friendTip}
       ></BillServiceCalc>
+      <Reset handleReset={handleReset}></Reset>
     </>
   );
 }
@@ -84,6 +97,16 @@ function BillServiceCalc({ bill, serviceTip, friendTip }) {
             <em>{`You pay $${totalBill} ($${billAmount} + ${tipCalculator} tip) 🫡`}</em>
           </p>
         )}
+      </div>
+    </>
+  );
+}
+
+function Reset({ handleReset }) {
+  return (
+    <>
+      <div>
+        <button onClick={handleReset}>Reset</button>
       </div>
     </>
   );
